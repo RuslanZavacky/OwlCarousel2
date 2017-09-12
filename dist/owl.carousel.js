@@ -2946,12 +2946,13 @@
 	 */
 	Navigation.prototype.destroy = function() {
 		var handler, control, property, override;
+		var settings = this._core.settings;
 
 		for (handler in this._handlers) {
 			this.$element.off(handler, this._handlers[handler]);
 		}
 		for (control in this._controls) {
-			if (control === '$relative' && settings.navContainer) {
+			if (control === '$relative' && settings && settings.navContainer) {
 				this._controls[control].html('');
 			} else {
 				this._controls[control].remove();
