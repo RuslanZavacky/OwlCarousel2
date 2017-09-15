@@ -819,9 +819,8 @@
 
 			this._drag.direction = direction;
 
-			// TODO: bugfix https://github.com/OwlCarousel2/OwlCarousel2/issues/1864
-			// if (Math.abs(delta.x) > 3 || new Date().getTime() - this._drag.time > 300) {
-		        if ((Math.abs(delta.x) > 3 || new Date().getTime() - this._drag.time > 300) && event.type === 'mouseup') {
+      // TODO: bugfix https://github.com/OwlCarousel2/OwlCarousel2/issues/1864
+      if ((Math.abs(delta.x) > 3 || new Date().getTime() - this._drag.time > 300) && event.type === 'mouseup') {
 				this._drag.target.one('click.owl.core', function() { return false; });
 			}
 		}
@@ -2945,14 +2944,14 @@
 	 * @protected
 	 */
 	Navigation.prototype.destroy = function() {
-		var handler, control, property, override;
-		var settings = this._core.settings;
+		var handler, control, property, override, settings;
+		settings = this._core.settings;
 
 		for (handler in this._handlers) {
 			this.$element.off(handler, this._handlers[handler]);
 		}
 		for (control in this._controls) {
-			if (control === '$relative' && settings && settings.navContainer) {
+			if (control === '$relative' && settings.navContainer) {
 				this._controls[control].html('');
 			} else {
 				this._controls[control].remove();
